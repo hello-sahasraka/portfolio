@@ -1,0 +1,84 @@
+import { useState } from "react";
+import { cn } from "../lib/util";
+
+const skills = [
+    //Front End 
+    { id: 1, name: "HTML5", category: "frontend", url: "skills/html.png" },
+    { id: 2, name: "CSS3", category: "frontend", url: "skills/css.png" },
+    { id: 3, name: "Java Script", category: "frontend", url: "skills/js.png" },
+    { id: 4, name: "TypeScript", category: "frontend", url: "skills/ts.svg" },
+    { id: 5, name: "Bootstrap", category: "frontend", url: "skills/bootstrap.png" },
+    { id: 6, name: "React", category: "frontend", url: "skills/react.png" },
+    { id: 7, name: "Express", category: "backend", url: "skills/expressjs.svg" },
+    { id: 8, name: "Next.js", category: "frontend", url: "skills/next.png" },
+    { id: 9, name: "Tailwind", category: "frontend", url: "skills/tailwind.png" },
+    { id: 11, name: "Java", category: "language", url: "skills/java.png" },
+    { id: 10, name: "Python", category: "language", url: "skills/python.png" },
+    { id: 12, name: "FastAPI", category: "backend", url: "skills/fastapi.svg" },
+    { id: 13, name: "SQL", category: "backend", url: "skills/sql.png" },
+    { id: 14, name: "MongoDB", category: "backend", url: "skills/mongodb.svg" },
+    { id: 21, name: "Docker", category: "tools", url: "skills/docker.png" },
+    { id: 15, name: "Github", category: "tools", url: "skills/github.png" },
+    { id: 18, name: "Firebase", category: "tools", url: "skills/firebase.svg" },
+    { id: 16, name: "VS Code", category: "tools", url: "skills/vscode.png" },
+    { id: 17, name: "Google Colab", category: "tools", url: "skills/google-colab.png" },
+    { id: 19, name: "Figma", category: "tools", url: "skills/figma.png" },
+    { id: 22, name: "Photoshop", category: "tools", url: "skills/photoshop.svg" },
+    { id: 23, name: "Illustrator", category: "tools", url: "skills/illustrator.svg" },
+    { id: 20, name: "Canva", category: "tools", url: "skills/canva.png" },
+
+];
+
+const categories = ["all", "frontend", "language", "backend", "tools"]
+
+
+export const SkillsSection = () => {
+
+    const [activecategory, setActiveCategory] = useState("all");
+
+    const filterSkills = skills.filter((skill) => activecategory === "all" || skill.category === activecategory)
+
+
+    return <section id="skill" className="py-24 px-4 relative bg-secondary/30">
+        <div className="container mx-auto max-w-5xl ">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+                My <span className="text-primary">Skills</span>
+            </h2>
+
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
+                {categories.map((category, key) => (
+                    <button
+                        onClick={() => setActiveCategory(category)}
+                        className={cn("px-5 py-2 rounded-full transition-colors duration-300 capitalize",
+                            activecategory === category ? "bg-primary text-primary-foreground"
+                                : "bg-secondary/70 text-foreground hover:bg-secondary"
+                        )}>{category}</button>
+                ))}
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {filterSkills.map((skill, id) => (
+                    <div key={id} className={cn("flex flex-col justify-center items-center  bg-primary/20 rounded-lg shadow-xs",
+                        "transition-all duration-300 ease-in-out transform",
+                        "hover:scale-110 hover:shadow-md hover:shadow-primary hover:border-primary hover:border-1")}>
+
+                        {/* Image */}
+                        <div className="w-16 h-16 overflow-hidden rounded-lg p-2 flex items-center justify-center">
+                            <img
+                                src={skill.url}
+                                alt={skill.name}
+                                className="w-full h-full object-contain"
+                            />
+                        </div>
+                        <div className="text-center mb-4">
+                            <h2 className="font-semibold text-lg">{skill.name}</h2>
+                        </div>
+
+                    </div>
+                ))}
+            </div>
+
+
+        </div>
+    </section>
+};
