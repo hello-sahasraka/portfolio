@@ -34,7 +34,7 @@ export const AboutSection = () => {
                                 "text-primary hover:bg-primary/40 transition-all duration-300"
                             )}
                         >
-                            Download Resume
+                            Download CV
                         </a>
                     </div>
                     <div className="pt-8">
